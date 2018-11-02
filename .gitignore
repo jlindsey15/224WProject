@@ -1,0 +1,7 @@
+DataPreprocessed
+__pycache__
+.ipynb_checkpoints/
+neupop/dist/
+neupop/neupop.egg-info/
+processed_data
+.DS_Store
