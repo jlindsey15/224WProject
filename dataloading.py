@@ -47,12 +47,15 @@ def read_from_files(savenames):
     return all_data
 
 
-def filter_data(data, perturbation_type=None, enforce_task_success=True):
+def filter_data(data, perturbation_type=None, enforce_task_success=True, time_window=None):
     data_block = copy.deepcopy(data)
     if perturbation_type is not None:
         data_block = U.filter_by(data_block, 'stim_site', [perturbation_type])
     if enforce_task_success:
         data_block = U.filter_by(data_block, 'behavior_report', [1])
+    if time_window is not None:
+        low, high = time_window
+        data_block['train_rates'] = data_block['train_rates'][:, np.arrange(low, high), :]
     data = BeneDict(data_block)
     return data
 
@@ -70,3 +73,4 @@ def normalize_by_behavior_report_type(data):
         # train_rates_selected = differentiate(train_rates_selected)
         train_rates_selected_mean = np.mean(train_rates_selected, axis=0, keepdims=True)
         data.train_rates[mask] -= train_rates_selected_mean
+    return data

@@ -4,7 +4,7 @@ from scipy.stats.stats import pearsonr
 
 
 def create_adjacency_matrix(data, edge_weight_func):
-    train_rates = data.train_rates[:, 22:37, :]
+    train_rates = data.train_rates
     N, T, K = train_rates.shape
     print('N, T, K: ', N, T, K)
     print(data.neuron_locations.shape)
