@@ -32,9 +32,9 @@ def granger_causality(v1, v2):
     """
         The probability that v2 => v1 is a causal relation
     """
-    signal1 = v1[:-1].flatten()
-    signal2 = v2[:-1].flatten()
-    response = np.array(v2[1:]).flatten()
+    signal1 = v1[:, :-1].flatten()
+    signal2 = v2[:, :-1].flatten()
+    response = np.array(v2[:, 1:]).flatten()
     # note signal 1 is used to predict the residue
     # because we want to know whether v1 causes v2
     slope1, intercept1, r_value1, p_value1, std_err1 \
