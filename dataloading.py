@@ -55,7 +55,7 @@ def filter_data(data, perturbation_type=None, enforce_task_success=True, time_wi
         data_block = U.filter_by(data_block, 'behavior_report', [1])
     if time_window is not None:
         low, high = time_window
-        data_block['train_rates'] = data_block['train_rates'][:, np.arrange(low, high), :]
+        data_block['train_rates'] = data_block['train_rates'][:, np.arange(low, high), :]
     data = BeneDict(data_block)
     return data
 
