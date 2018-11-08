@@ -20,3 +20,11 @@ def cos_diff(v1, v2):
 def differentiate(arr):
     return arr[:, 1:, :] - arr[:, :-1, :]
 
+def binned(values, value_range):
+    counts = np.array([0 for x in value_range])
+    for value in values:
+        for i in range(len(value_range)):
+            if value > value_range[i]:
+                counts[i] += 1
+    counts = counts[:-1] - counts[1:]
+    return counts
