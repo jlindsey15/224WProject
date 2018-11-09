@@ -2,9 +2,15 @@ import numpy as np
 from scipy.stats import linregress
 from scipy.stats.stats import pearsonr
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from dataloading import normalize_by_behavior_report_type
 
 
-def create_adjacency_matrix(data, edge_weight_func):
+
+def create_adjacency_matrix(data, edge_weight_func, perturbation_type):
+    if perturbation_type != 3 and (edge_weight_func == flatten_correlation or edge_weight_func == granger_causality):
+        print('normalizing')
+        data = normalize_by_behavior_report_type(data)
     train_rates = data.train_rates
     N, T, K = train_rates.shape
     print('N, T, K: ', N, T, K)
