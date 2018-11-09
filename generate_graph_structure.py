@@ -31,7 +31,7 @@ def flatten_correlation(v1, v2):
     # v1 is of shape trial x time_step
     v1 = v1.flatten()
     v2 = v2.flatten()
-    value, _ = pearsonr(v1, v2)
+    value, _ = np.abs(pearsonr(v1, v2))
     return value
 
 
@@ -62,5 +62,5 @@ def behavioral_prediction_correlation_wrapper(behavior_report_type):
         v2reg = LogisticRegression()
         v2reg.fit(v2last, behavior_report_type)
         v2pred = v2reg.predict(v2last)
-        return(2*(np.sum(v1pred == v2pred) / len(v1pred) - 0.5))
+        return(np.sum(v1pred == v2pred) / len(v1pred))
     return behavioral_prediction_correlation
