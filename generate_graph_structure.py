@@ -37,7 +37,7 @@ def flatten_correlation(v1, v2):
 
 def granger_causality(v1, v2):
     """
-        The probability that v2 => v1 is a causal relation
+        The probability that v1 => v2 is a causal relation
     """
     signal1 = v1[:, :-1].flatten()
     signal2 = v2[:, :-1].flatten()
@@ -50,6 +50,7 @@ def granger_causality(v1, v2):
     slope2, intercept2, r_value2, p_value2, std_err2 \
         = linregress(signal1, residue)
     return 1 - p_value2
+
 
 def behavioral_prediction_correlation_wrapper(behavior_report_type):
     def behavioral_prediction_correlation(v1, v2, behavior_report_type=behavior_report_type):
