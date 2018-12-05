@@ -57,10 +57,10 @@ def behavioral_prediction_correlation_wrapper(behavior_report_type):
         behavior_report_type = behavior_report_type == 'l'
         v1last = v1[:, -1].reshape(-1, 1)
         v2last = v2[:, -1].reshape(-1, 1)
-        v1reg = LogisticRegression()
+        v1reg = LogisticRegression(solver='lbfgs')
         v1reg.fit(v1last, behavior_report_type)
         v1pred = v1reg.predict(v1last)
-        v2reg = LogisticRegression()
+        v2reg = LogisticRegression(solver='lbfgs')
         v2reg.fit(v2last, behavior_report_type)
         v2pred = v2reg.predict(v2last)
         return(np.sum(v1pred == v2pred) / len(v1pred))
